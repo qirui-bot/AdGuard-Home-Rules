@@ -8,3 +8,6 @@
 ||adx.sogaha.cn^$important
 # 百度网盘开屏广告
 ||*.ubixioe.com^$important
+# 腾讯视频网页广告
+## https://pgdt.gtimg.cn
+||*.gtimg.cn^$important
