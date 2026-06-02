@@ -9,5 +9,15 @@
 # 百度网盘开屏广告
 ||*.ubixioe.com^$important
 # 腾讯视频网页广告
-## https://pgdt.gtimg.cn
-||*.gtimg.cn^$important
+# 头条广告
+||https://gromore.pangolin-sdk-toutiao.com
+||https://toblog.ctobsnssdk.com
+||https://sf6-fe-tos.pglstatp-toutiao.com
+||https://guid.tpns.tencent.com
+||http://sdk.beizi.biz
+||http://sdktmp.hubcloud.com.cn
+||https://sdk.e.qq.com
+||https://resolve.umeng.com
+||https://open.e.kuaishou.com
+||https://tnc3-bjlgy.zijieapi.com
+||https://yumao.puata.info
