@@ -12,7 +12,7 @@
 ```
 https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/combined-rules.txt
 ```
-黑名单（补充）
+黑名单（补充,已合并，无需额外添加）
 ```
 https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/Supplement-rules.txt
 ```
