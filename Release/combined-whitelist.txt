@@ -12,6 +12,7 @@
 @@||api.sec.miui.com^$important
 # 腾讯视频
 @@||qpic.cn^$important
+@@||*.gtimg.cn^$important
 # 网易云
 @@||*.music.126.net^$important
 # 头条
