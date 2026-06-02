@@ -19,7 +19,8 @@ SOURCES = {
         'https://raw.githubusercontent.com/lingeringsound/adblock_auto/refs/heads/main/Rules/adblock_auto.txt',
         'https://raw.githubusercontent.com/kl0711/adRlues/refs/heads/main/Ad-rules.txt',
         'https://raw.githubusercontent.com/kl0711/adRlues/refs/heads/main/AdGuard-fanqie.txt',
-        'https://raw.githubusercontent.com/KiryChanOfficial/AdFilterForAdGuard/refs/heads/main/KR_DNS_Filter.txt'
+        'https://raw.githubusercontent.com/KiryChanOfficial/AdFilterForAdGuard/refs/heads/main/KR_DNS_Filter.txt',
+        'https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/Supplement-rules.txt'
     ],
     'malware': [
         'https://malware-filter.pages.dev/urlhaus-filter-online.txt',
