@@ -21,3 +21,5 @@
 ||https://open.e.kuaishou.com
 ||https://tnc3-bjlgy.zijieapi.com
 ||https://yumao.puata.info
+# 美团广告
+||https://api-unionid.meituan.com^$important
