@@ -10,15 +10,21 @@
 @@||security.browser.miui.com^$important
 @@||tracking.miui.com^$important
 @@||api.sec.miui.com^$important
+@@||metok.sys.miui.com^$important
+
 # 腾讯视频
 @@||qpic.cn^$important
 @@||*.gtimg.cn^$important
+
 # 网易云
 @@||*.music.126.net^$important
+
 # 头条
 @@||*.toutiaoimg.com^$important
+
 # 京东
 @@||*.360buyimg.com^$important
+
 # 微软
 @@||*.microsoft.com^$important
 @@||*.bing.com^$important
@@ -26,6 +32,22 @@
 @@||*.live.com^$important
 @@||ctldl.windowsupdate.com^$important
 @@||login.microsoftonline.com^$important
+
 # 115网盘
 @@||down.115.com^$important
 @@||*.115cdn.net^$important
+
+# 王者荣耀头像
+@@||*.qlogo.cn^$important
+
+# 飞牛NAS官网
+@@||*.fnnas.com^$important
+
+# 小红书
+@@||*.xhscdn.com^$important
+
+# 美团
+@@||*.meituan.net^$important
+
+# 饿了么
+@@||*.ele.me^$important
