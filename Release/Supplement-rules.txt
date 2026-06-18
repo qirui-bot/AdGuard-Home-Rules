@@ -12,17 +12,17 @@
 ||*.ubixioe.com^$important
 # 腾讯视频网页广告
 # 头条广告
-||https://gromore.pangolin-sdk-toutiao.com
-||https://toblog.ctobsnssdk.com
-||https://sf6-fe-tos.pglstatp-toutiao.com
-||https://guid.tpns.tencent.com
-||http://sdk.beizi.biz
-||http://sdktmp.hubcloud.com.cn
-||*.e.qq.com^$important
-||*.y.qq.com^$important
-||https://resolve.umeng.com
-||https://open.e.kuaishou.com
-||https://tnc3-bjlgy.zijieapi.com
-||https://yumao.puata.info
+||https://gromore.pangolin-sdk-toutiao.com^$important
+||https://toblog.ctobsnssdk.com^$important
+||https://sf6-fe-tos.pglstatp-toutiao.com^$important
+||https://guid.tpns.tencent.com^$important
+||http://sdk.beizi.biz^$important
+||http://sdktmp.hubcloud.com.cn^$important
+||*.e.qq.com^$important^$important
+||*.y.qq.com^$important^$important
+||https://resolve.umeng.com^$important
+||https://open.e.kuaishou.com^$important
+||https://tnc3-bjlgy.zijieapi.com^$important
+||https://yumao.puata.info^$important
 # 美团广告
 ||https://api-unionid.meituan.com^$important
