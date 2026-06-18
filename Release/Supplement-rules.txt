@@ -16,7 +16,8 @@
 ||https://guid.tpns.tencent.com
 ||http://sdk.beizi.biz
 ||http://sdktmp.hubcloud.com.cn
-||https://sdk.e.qq.com
+||*.e.qq.com^$important
+||*.y.qq.com^$important
 ||https://resolve.umeng.com
 ||https://open.e.kuaishou.com
 ||https://tnc3-bjlgy.zijieapi.com
