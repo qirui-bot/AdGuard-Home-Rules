@@ -34,7 +34,7 @@
 @@||login.microsoftonline.com^$important
 
 # 115网盘
-@@||down.115.com^$important
+@@||*.115.com^$important
 @@||*.115cdn.net^$important
 
 # 王者荣耀头像
@@ -51,3 +51,15 @@
 
 # 饿了么
 @@||*.ele.me^$important
+
+# 小红书表情包
+@@||*.myqcloud.com^$important
+
+# 苹果
+@@||*.apple.com^$important
+
+# True NAS
+@@||*.truenas.com^$important
+
+# tmdb
+@@||*.tmdb.org^$important
