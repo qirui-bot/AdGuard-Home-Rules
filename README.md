@@ -12,7 +12,10 @@
 ```
 https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/combined-rules.txt
 ```
-
+黑名单（非通用格式）
+```
+https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/special-rules.txt
+```
 白名单
 ```
 https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/combined-whitelist.txt
@@ -26,6 +29,7 @@ AdGuard-Home-Rules/
 ├── Release/
 │   ├── combined-whitelist      #白名单规则集，如发现新增的，可直接添加在此文件
 │   └── combined-rules.txt       # 最终合并黑名单规则集
+│   └── special-rules.txt       # 补充黑名单规则集（非通用格式）
 ├── filters/                      # 生成的过滤规则文件
 │   ├── ad-blacklist.txt         # 广告黑名单
 │   ├── malware-blacklist.txt    # 恶意软件黑名单
