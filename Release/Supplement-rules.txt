@@ -5,6 +5,7 @@
 ||google.*/pagead/lvz?$important
 ||google.com/pagead/
 ||static.doubleclick.net^$domain=youtube.com
+||static.doubleclick.net^$important
 ||youtube.com/get_midroll_
 # 车来了广告获取
 ||adx.sogaha.cn^$important
