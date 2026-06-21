@@ -26,3 +26,15 @@
 ||https://yumao.puata.info^$important
 # 美团广告
 ||https://api-unionid.meituan.com^$important
+# 开屏广告
+||sdk-monitoring.unityads.unity3d.com^$important
+||ad.xiaomi.com^$important
+||ssp.1rtb.com^$important
+||open.phone.2345.com^$important
+||res-ad.c2c.qq.com^$important
+||mi.gdt.qq.com^$important
+||pgdt.gtimg.cn^$important
+||adsmind.gdtimg.com^$important
+||mi.ads.heytapmobi.com^$important
+||adx.ads.heytapmobi.com^$important
+||appconf-ocs.heytapmobi.com^$important
