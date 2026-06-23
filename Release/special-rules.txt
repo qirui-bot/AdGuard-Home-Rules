@@ -4,3 +4,5 @@
 ||google.com/pagead/
 ||static.doubleclick.net^$domain=youtube.com
 ||youtube.com/get_midroll_
+*||g.doubleclick.net^
+*||google.*/pagead/lvz?
