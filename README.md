@@ -59,6 +59,7 @@ AdGuard-Home-Rules/
 - https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt
 - https://easylist-downloads.adblockplus.org/easylist.txt
 - https://easylist-downloads.adblockplus.org/easylistchina.txt
+- https://anti-ad.net/easylist.txt
 - https://raw.githubusercontent.com/chinanjh/hosts/refs/heads/master/fuck%20youtube.txt
 - https://raw.githubusercontent.com/BlueSkyXN/AdGuardHomeRules/master/all.txt
 - https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt
