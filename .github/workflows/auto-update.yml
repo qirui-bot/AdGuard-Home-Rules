@@ -1,4 +1,5 @@
 name: Rules Update
+
 on:
   schedule:
     - cron: '*/30 * * * *'  # 每 30 分钟运行一次
@@ -8,11 +9,10 @@ jobs:
   update-rules:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Removed actions:write unless specifically needed
-
+      contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
@@ -29,7 +29,7 @@ jobs:
           fi
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -48,7 +48,7 @@ jobs:
           python scripts/combine_final.py
 
       - name: Validate rules
-        run: |
+        run: | 
           FILE="Release/combined-rules.txt"
           if [ -s "$FILE" ]; then
             echo "✅ Rules generated successfully"
@@ -58,13 +58,37 @@ jobs:
             exit 1
           fi
 
+      # ================= 新增部分：更新 README 信息 =================
+      - name: Update README Info
+        run: |
+          # 1. 统计规则总数 (排除空行)
+          RULE_COUNT=$(grep -c -v '^[[:space:]]*$' "Release/combined-rules.txt")
+          # 2. 获取当前时间
+          UPDATE_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+          
+          # 3. 过滤掉 README 中旧的更新信息行，保留原内容
+          grep -v '^> 🕒' README.md | grep -v '^> 📊' > tmp.md
+          
+          # 4. 将新信息插入到 README 最开头，并拼接原内容
+          {
+            echo "> 🕒 **最后更新**: ${UPDATE_TIME}"
+            echo "> 📊 **规则总数**: ${RULE_COUNT} 条"
+            echo ""
+            cat tmp.md
+          } > README.md
+          
+          # 5. 清理临时文件
+          rm tmp.md
+      # ============================================================
+
       - name: Commit and push changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
 
           if ! git diff --quiet || ! git diff --staged --quiet; then
-            git add Release/
+            # 注意：这里增加了 README.md，确保修改被提交
+            git add Release/ README.md
             git commit -m "Auto-update: $(date +'%Y-%m-%d %H:%M:%S')"
             git push
           else
