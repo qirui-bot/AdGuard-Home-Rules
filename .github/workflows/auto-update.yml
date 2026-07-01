@@ -1,7 +1,8 @@
-name: Daily Rules Update
+name: Rules Update
+
 on:
   schedule:
-    - cron: '0 */2 * * *' # 每2小时更新一次（UTC时间每逢偶数小时的0分执行）
+    - cron: '*/30 * * * *'  # 每 30 分钟运行一次
   workflow_dispatch:
 
 jobs:
