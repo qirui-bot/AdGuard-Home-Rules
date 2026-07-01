@@ -10,15 +10,15 @@
 #### 直接使用：在AdGuard Home中添加规则订阅
 黑名单
 ```
-https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/combined-rules.txt
+https://raw.githubusercontent.com/qirui-bot/AdGuard-Home-Rules/main/Release/combined-rules.txt
 ```
 黑名单（非通用格式）
 ```
-https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/special-rules.txt
+https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/main/Release/special-rules.txt
 ```
 白名单
 ```
-https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/refs/heads/main/Release/combined-whitelist.txt
+https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/main/Release/combined-whitelist.txt
 ```
 
 #### 文件目录说明
