@@ -48,7 +48,7 @@ jobs:
           python scripts/combine_final.py
 
       - name: Validate rules
-        run: | 
+        run: |
           FILE="Release/combined-rules.txt"
           if [ -s "$FILE" ]; then
             echo "✅ Rules generated successfully"
