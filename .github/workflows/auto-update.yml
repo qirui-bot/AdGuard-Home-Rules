@@ -1,7 +1,7 @@
 name: Daily Rules Update
 on:
   schedule:
-    - cron: '0 22 * * *'  # UTC 22:00 daily (Beijing 6:00+1)
+    - cron: '0 */2 * * *' # 每2小时更新一次（UTC时间每逢偶数小时的0分执行）
   workflow_dispatch:
 
 jobs:
