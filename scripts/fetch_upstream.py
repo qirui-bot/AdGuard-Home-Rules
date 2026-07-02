@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from typing import Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# 上游规则源配置 (已修复原代码中URL的奇怪空格)
+# 上游规则源配置 (已彻底清理URL中的所有奇怪空格)
 SOURCES = {
     'ads': [
         'https://raw.githubusercontent.com/ppfeufer/adguard-filter-list/master/blocklist',
@@ -33,10 +33,10 @@ SOURCES = {
     ]
 }
 
-# 请求配置 (方案四：增加超时和重试次数)
-REQUEST_TIMEOUT = 60      # 增加超时时间至 60 秒
+# 请求配置
+REQUEST_TIMEOUT = 60      # 超时时间 60 秒
 RETRY_DELAY = 3           # 基础重试延迟 3 秒
-MAX_RETRIES = 5           # 增加重试次数至 5 次
+MAX_RETRIES = 5           # 重试次数 5 次
 MIN_FILE_SIZE = 50        # 最小文件大小（字节）
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
@@ -53,7 +53,7 @@ def get_filename_from_url(url: str) -> str:
 
 def download_with_retry(url: str, filepath: Path, max_retries: int = MAX_RETRIES) -> Tuple[bool, str]:
     """带重试机制的下载（支持指数退避）"""
-    for attempt in range(max_retries):
+    for attempt in range(max_retries): 
         try:
             print(f"    📥 Attempt {attempt + 1}/{max_retries}: {url}")
 
@@ -67,7 +67,7 @@ def download_with_retry(url: str, filepath: Path, max_retries: int = MAX_RETRIES
             )
             response.raise_for_status()
 
-            # 验证内容
+            # 验证内容大小
             content = response.content
             if len(content) < MIN_FILE_SIZE:
                 return False, f"File too small ({len(content)} bytes)"
@@ -75,20 +75,26 @@ def download_with_retry(url: str, filepath: Path, max_retries: int = MAX_RETRIES
             # 检查是否返回HTML错误页面 (修复了原代码截断的问题)
             content_type = response.headers.get('content-type', '').lower()
             if 'text/html' in content_type:
-                if b'<html' in content.lower() or b'<!doctype' in content.lower():
-                    return False, "Received HTML error page instead of filter list"
+                # 如果返回的是HTML，大概率是404或错误页面，直接拒绝
+                if b'<html' in content.lower() or b'404 not found' in content.lower():
+                    return False, "Received HTML error page instead of rule list"
 
+            # 【核心修复】将内容写入文件
             filepath.write_bytes(content)
-            return True, f"Saved {len(content)} bytes"
+            return True, f"Downloaded {len(content)} bytes"
 
         except requests.exceptions.RequestException as e:
             if attempt < max_retries - 1:
-                # 指数退避策略：3s, 6s, 12s, 24s... 避免频繁请求被服务器封禁
-                wait_time = RETRY_DELAY * (2 ** attempt)
-                print(f"    ⚠️  Timeout/Error ({type(e).__name__}), retrying in {wait_time}s...")
-                time.sleep(wait_time)
+                # 指数退避延迟
+                sleep_time = RETRY_DELAY * (2 ** attempt)
+                print(f"    ⏳ Retrying in {sleep_time}s... Error: {e}")
+                time.sleep(sleep_time)
             else:
-                return False, f"Timeout after all retries ({type(e).__name__})"
+                return False, f"Failed after {max_retries} attempts: {e}"
+        except Exception as e:
+            return False, f"Unexpected error: {e}"
+            
+    return False, "Max retries exceeded"
 
 def fetch_all_sources() -> bool:
     """并发获取所有上游规则源"""
@@ -122,7 +128,7 @@ def fetch_all_sources() -> bool:
 
     print(f"\n🚀 Starting concurrent downloads for {len(tasks)} files...")
     
-    # 【核心提速】使用线程池并发下载，max_workers=8 表示同时开启8个下载任务
+    # 使用线程池并发下载
     with ThreadPoolExecutor(max_workers=8) as executor:
         future_to_url = {executor.submit(download_with_retry, url, filepath): (url, filepath) for url, filepath in tasks}
         
