@@ -63,8 +63,8 @@ jobs:
         run: |
           # 1. 统计规则总数 (排除空行)
           RULE_COUNT=$(grep -c -v '^[[:space:]]*$' "Release/combined-rules.txt")
-          # 2. 获取当前时间
-          UPDATE_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+          # 2. 获取当前北京时间
+          UPDATE_TIME=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
           
           # 3. 过滤掉 README 中旧的更新信息行，保留原内容
           grep -v '^> 🕒' README.md | grep -v '^> 📊' > tmp.md
