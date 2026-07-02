@@ -51,6 +51,22 @@ def get_filename_from_url(url: str) -> str:
         return f"{domain}_{name}.txt"
     return f"{domain}.txt"
 
+def is_valid_file_content(filepath: Path) -> bool:
+    """检查文件内容是否为有效的规则列表，而非HTML错误页"""
+    try:
+        with open(filepath, 'rb') as f:
+            # 读取前1KB，足够判断是否为HTML
+            content = f.read(1024)
+            if not content:
+                return False
+            lower_content = content.lower()
+            # 若包含HTML标签或404错误，视为无效
+            if b'<html' in lower_content or b'404 not found' in lower_content:
+                return False
+            return True
+    except Exception:
+        return False
+
 def download_with_retry(url: str, filepath: Path, max_retries: int = MAX_RETRIES) -> Tuple[bool, str]:
     """带重试机制的下载（支持指数退避）"""
     for attempt in range(max_retries): 
@@ -109,15 +125,19 @@ def fetch_all_sources() -> bool:
             filename = get_filename_from_url(url)
             filepath = category_dir / filename
             
-            # 检查是否已存在且大小足够
+            # 检查是否已存在且大小足够且内容有效
             if filepath.exists():
                 size = filepath.stat().st_size
-                if size >= MIN_FILE_SIZE:
-                    print(f"    ⏭️  Already exists: {filename} ({size} bytes)")
+                if size >= MIN_FILE_SIZE and is_valid_file_content(filepath):
+                    print(f"    ⏭️  Already exists and valid: {filename} ({size} bytes)")
                     stats['skipped'] += 1
                     continue
                 else:
-                    # 删除无效的旧文件
+                    # 删除无效或过小的旧文件
+                    if size < MIN_FILE_SIZE:
+                        print(f"    ⚠️  Existing file too small ({size} bytes), re-downloading: {filename}")
+                    else:
+                        print(f"    ⚠️  Existing file invalid (HTML/error), re-downloading: {filename}")
                     filepath.unlink()
             
             tasks.append((url, filepath))
