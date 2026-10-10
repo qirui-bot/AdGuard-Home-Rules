@@ -1,0 +1,171 @@
+name: Daily Rules Update
+
+on:
+  schedule:
+    # 从北京 6:17 开始，每 6 小时一次，分钟保持 17
+    # UTC 22:17 / 4:17 / 10:17 / 16:17
+    # 北京时间 6:17 / 12:17 / 18:17 / 次日 0:17
+    # 小时避开 UTC 0 点和 12 点等拥堵高峰
+    - cron: '17 4-22/6 * * *'
+  workflow_dispatch:
+
+# 功能1：并发控制，防止定时任务和手动触发同时运行导致冲突
+concurrency:
+  group: daily-rules-update-group
+  cancel-in-progress: true
+
+jobs:
+  update-rules:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # 功能2：删除 workflow runs 需要 actions:write
+      actions: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Verify scripts exist
+        run: |
+          missing=()
+          for script in fetch_upstream.py merge_rules.py whitelist_processor.py combine_final.py; do
+            [ -f "scripts/$script" ] || missing+=("$script")
+          done
+          if [ ${#missing[@]} -ne 0 ]; then
+            echo "❌ Missing scripts: ${missing[*]}"
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install requests tldextract
+
+      - name: Create necessary directories
+        run: mkdir -p sources filters scripts Release
+
+      - name: Run rules pipeline
+        run: |
+          python scripts/fetch_upstream.py
+          python scripts/merge_rules.py
+          python scripts/whitelist_processor.py
+          python scripts/combine_final.py
+
+      - name: Validate rules
+        run: |
+          FILE="Release/combined-rules.txt"
+          if [ -s "$FILE" ]; then
+            echo "✅ Rules generated successfully"
+            echo "Line count: $(wc -l < "$FILE")"
+          else
+            echo "❌ Combined rules file is empty or missing!"
+            exit 1
+          fi
+
+      # ================= 新增：独立同步 H-i-H 上游文件 =================
+      # 不经过 fetch_upstream.py，不进入分类流程，
+      # 直接覆盖 qirui-bot 对应文件。
+      - name: Sync files from H-i-H upstream
+        continue-on-error: true
+        run: |
+          set -e
+          BASE="https://raw.githubusercontent.com/H-i-H/AdGuard-Home-Rules/main"
+
+          # 目标目录准备
+          mkdir -p Release filters
+
+          # 映射：上游路径 -> 本地路径
+          declare -A FILES=(
+            ["Release/special-rules.txt"]="Release/special-rules.txt"
+            ["Release/combined-whitelist.txt"]="Release/combined-whitelist.txt"
+            ["Release/Supplement-rules.txt"]="Release/Supplement-rules.txt"
+            ["filters/malware-whitelist.txt"]="filters/malware-whitelist.txt"
+            ["filters/adult-whitelist.txt"]="filters/adult-whitelist.txt"
+            ["filters/ad-whitelist.txt"]="filters/ad-whitelist.txt"
+          )
+
+          for SRC in "${!FILES[@]}"; do
+            DST="${FILES[$SRC]}"
+            URL="$BASE/$SRC"
+            echo "⬇️ 下载 $URL -> $DST"
+            if curl -fsSL --retry 3 --retry-delay 5 -o "$DST.tmp" "$URL"; then
+              if [ -s "$DST.tmp" ]; then
+                if ! cmp -s "$DST.tmp" "$DST"; then
+                  mv "$DST.tmp" "$DST"
+                  echo "✅ 已更新 $DST ($(wc -l < "$DST") 行)"
+                else
+                  echo "⏭️ 无变化：$DST"
+                  rm -f "$DST.tmp"
+                fi
+              else
+                echo "⚠️ 下载内容为空，保留原文件：$DST"
+                rm -f "$DST.tmp"
+              fi
+            else
+              echo "❌ 下载失败，保留原文件：$DST"
+              rm -f "$DST.tmp"
+            fi
+          done
+
+      # ================= 新增：死链清洗 & DNS 缓存 =================
+      - name: Install DNS check dependencies
+        run: pip install dnspython
+
+      - name: Run dead link cleaning & DNS cache generation
+        run: python scripts/visualize_and_clean.py
+
+      # ================= 新增：自定义规则剔除 =================
+      - name: Run custom rules injector (exclude upstream sources)
+        run: python scripts/custom_rules_injector.py
+
+      - name: Commit and push changes (single commit history)
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+          export GIT_AUTHOR_NAME="GitHub Actions"
+          export GIT_AUTHOR_EMAIL="actions@github.com"
+          export GIT_COMMITTER_NAME="GitHub Actions"
+          export GIT_COMMITTER_EMAIL="actions@github.com"
+
+          # 功能7：更新心跳文件，避免仓库连续 60 天无活动导致 schedule 被禁用
+          export TZ='Asia/Shanghai'
+          CURRENT_TIME=$(date '+%Y-%m-%d %H:%M:%S %Z')
+          echo "💓 更新心跳文件 (北京时间): $CURRENT_TIME"
+          echo "Last heartbeat (Beijing Time): $CURRENT_TIME" > heartbeat.txt
+
+          # 功能8：git add --all，确保心跳文件、Release 等所有变更进入暂存区
+          git add --all
+
+          if ! git diff --staged --quiet; then
+            # 添加功能：创建无父提交，仅保留最新提交
+            TREE=$(git write-tree)
+            COMMIT_MSG="Auto-update: $(date +'%Y-%m-%d %H:%M:%S')"
+            NEW_COMMIT=$(echo "$COMMIT_MSG" | git commit-tree "$TREE")
+
+            # 将当前分支指向这个无父提交，旧历史全部被丢弃
+            git reset --hard "$NEW_COMMIT"
+
+            # 强制推送，远程分支只保留这一条最新提交
+            git push -u origin HEAD:${GITHUB_REF_NAME} -f
+          else
+            echo "No changes to commit"
+          fi
+
+      # 功能9：删除历史 workflow runs
+      - name: Delete workflow runs
+        if: always()
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 0
