@@ -1,0 +1,194 @@
+# Adguard Home Private Rules Bundle
+# =================================
+# =============白名单列表============
+# =================================
+
+# ----------------------------------
+# 115网盘
+# ----------------------------------
+@@||115.com^$important
+@@||115cdn.net^$important
+
+# ----------------------------------
+# Apple
+# ----------------------------------
+@@||apple.com^$important
+
+# ----------------------------------
+# B站
+# ----------------------------------
+@@||bilibili.com^$important
+@@||hdslb.com^$important
+
+# ----------------------------------
+# GitHub
+# ----------------------------------
+@@||github.com^$important
+@@||githubusercontent.com^$important
+
+# ----------------------------------
+# Google GMS/FCM
+# ----------------------------------
+@@||googleapis.com^$important
+@@||gstatic.com^$important
+
+# ----------------------------------
+# Microsoft
+# ----------------------------------
+@@||microsoft.com^$important
+@@||live.com^$important
+@@||skype.com^$important
+@@||bing.com^$important
+@@||ctldl.windowsupdate.com^$important
+@@||login.microsoftonline.com^$important
+
+# ----------------------------------
+# QQ
+# ----------------------------------
+@@||qpic.cn^$important
+@@||gtimg.cn^$important
+@@||qlogo.cn^$important
+@@||push.qq.com^$important
+
+# ----------------------------------
+# Steam
+# ----------------------------------
+@@||steampowered.com^$important
+@@||steamcommunity.com^$important
+@@||steamstatic.com^$important
+
+# ----------------------------------
+# TMDB
+# ----------------------------------
+@@||tmdb.org^$important
+
+# ----------------------------------
+# TrueNAS
+# ----------------------------------
+@@||truenas.com^$important
+
+# ----------------------------------
+# WPS
+# ----------------------------------
+@@||account.wps.cn^$important
+
+# ----------------------------------
+# 爱快
+# ----------------------------------
+@@||ikyun.oss.ikuai8.com^$important
+@@||imgur.com^$important
+
+# ----------------------------------
+# 百度
+# ----------------------------------
+@@||www.baidu.com^$important
+@@||pan.baidu.com^$important
+@@||map.baidu.com^$important
+@@||tieba.baidu.com^$important
+@@||baike.baidu.com^$important
+@@||wenku.baidu.com^$important
+@@||bdimg.com^$important
+@@||bdstatic.com^$important
+
+# ----------------------------------
+# 飞牛NAS
+# ----------------------------------
+@@||fnnas.com^$important
+
+# ----------------------------------
+# 高德地图
+# ----------------------------------
+@@||amap.com^$important
+
+# ----------------------------------
+# 京东
+# ----------------------------------
+@@||360buyimg.com^$important
+
+# ----------------------------------
+# 酷安
+# ----------------------------------
+@@||coolapk-oss-image.oss-cn-hangzhou.aliyuncs.com^$important
+
+# ----------------------------------
+# 美团
+# ----------------------------------
+@@||waimai.meituan.com^$important       # 外卖主站
+@@||i.waimai.meituan.com^$important     # 外卖图片
+@@||msp.meituan.com^$important          # 支付/订单
+@@||dianping.com^$important             # 大众点评
+@@||file.neixin.cn^$important           # 消息通知图片
+@@||dianping.com^$important
+
+# ----------------------------------
+# 搜狗输入法
+# ----------------------------------
+@@||img.shouji.sogou.com^$important
+
+# ----------------------------------
+# 网易云音乐
+# ----------------------------------
+@@||music.126.net^$important
+
+# ----------------------------------
+# 微博
+# ----------------------------------
+@@||sinaimg.cn^$important
+
+# ----------------------------------
+# 微信
+# ----------------------------------
+@@||weixin.qq.com^$important
+@@||res.wx.qq.com^$important
+
+# ----------------------------------
+# 小米/MIUI
+# ----------------------------------
+@@||market.xiaomi.com^$important
+@@||xmpush.xiaomi.com^$important
+@@||mipush.xiaomi.com^$important
+@@||resolver.msg.xiaomi.net^$important
+@@||pdc.micloud.xiaomi.net^$important
+@@||api.device.xiaomi.net^$important
+@@||security.browser.miui.com^$important
+@@||r.browser.miui.com^$important
+@@||api.sec.miui.com^$important
+@@||metok.sys.miui.com^$important
+
+# ----------------------------------
+# 小红书
+# ----------------------------------
+@@||xhscdn.com^$important
+
+# ----------------------------------
+# 迅雷
+# ----------------------------------
+@@||sandai.net^$important
+
+# ----------------------------------
+# 今日头条
+# ----------------------------------
+@@||toutiaoimg.com^$important
+
+# ----------------------------------
+# 支付宝
+# ----------------------------------
+@@||alipay.com^$important
+
+# ----------------------------------
+# 淘宝
+# ----------------------------------
+@@||alicdn.com^$important
+
+# ----------------------------------
+# 饿了么
+# ----------------------------------
+@@||h5.ele.me^$important
+@@||elemecdn.com^$important
+@@||elemecdn.net^$important
+@@||aldcdn.com^$important
+
+# ----------------------------------
+# 证书
+# ----------------------------------
+@@||certum.pl^$important

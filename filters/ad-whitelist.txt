@@ -1,0 +1,137 @@
+! 个人广告过滤白名单
+! 用途：防止误拦截重要服务
+! 格式：域名
+! 更新时间：2025-12-25
+
+! ========== 小米系 ==========
+thm.market.xiaomi.com
+mibi.api.xiaomi.com
+t*.market.xiaomi.com
+cnbj*.fds.api.xiaomi.com
+hot.browser.miui.com
+api.browser.miui.com
+ai.search.miui.com
+api.vip.miui.com
+web.vip.miui.com
+api.hybrid.xiaomi.com
+statusapi.micloud.xiaomi.net
+api.installer.xiaomi.com
+api.comm.miui.com
+cdn.browser.miui.com
+
+! ========== 阿里系 ==========
+! 淘宝/天猫/支付宝/阿里云
+alicdn.com
+aliyun.com
+taobao.com
+alipay.com
+aliexpress.com
+tmall.com
+alibaba.com
+
+! ========== 百度系 ==========
+! 百度搜索/贴吧/网盘/地图
+bdstatic.com
+bdimg.com
+baidu.com
+baidustatic.com
+pan.baidu.com
+map.baidu.com
+t*.baidu.com
+
+! ========== 腾讯系 ==========
+! 微信/QQ/腾讯云/腾讯视频
+qq.com
+gtimg.com
+qpic.cn
+weixin.qq.com
+wechat.com
+tencent-cloud.com
+qcloud.com
+v.qq.com
+puui.qpic.cn
+cloud.tencent.com
+
+! ========== 微软系 ==========
+! Windows更新/Office/OneDrive
+microsoft.com
+windowsupdate.com
+msftconnecttest.com
+office.com
+onedrive.com
+h*.sinaimg.cn
+tvax*.sinaimg.cn
+wx*.sinaimg.cn
+
+! ========== 苹果系 ==========
+! iCloud/App Store/Apple服务
+apple.com
+icloud.com
+apple-cloudkit.com
+appstore.com
+mzstatic.com
+
+! ========== Google系 ==========
+! 开发/搜索/云服务
+googleapis.com
+gstatic.com
+google.com
+google-analytics.com
+youtube.com
+gmail.com
+google.com
+github.com
+
+! ========== 字节跳动系 ==========
+! 抖音/今日头条/TikTok
+douyin.com
+bytecdntp.com
+pstatp.com
+snssdk.com
+aweme.snssdk.com
+applog.zijieapi.com
+log.zijieapi.com
+
+! ========== 美团/京东系 ==========
+meituan.com
+sankuai.com
+jd.com
+
+! ========== 公共CDN/云服务 ==========
+amazonaws.com
+cloudfront.net
+azureedge.net
+
+! ========== 开发测试环境 ==========
+localhost
+127.0.0.1
+::1
+dev-server.local
+192.168.
+stackoverflow.com
+npmjs.com
+pypi.org
+
+! ========== 其他常用服务 ==========
+163.com
+sina.com.cn
+weibo.com
+zhihu.com
+bilibili.com
+amazon.com
+wikipedia.org
+twitter.com
+linkedin.com
+reddit.com
+reuters.com
+bbc.com
+nytimes.com
+ms.vipstatic.com
+ads-vp5.xhscdn.com
+
+! ========== 支付/银行 ==========
+unionpay.com
+95516.com
+paypal.com
+visa.com
+mastercard.com
