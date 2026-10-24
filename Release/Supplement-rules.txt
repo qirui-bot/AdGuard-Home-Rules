@@ -1,0 +1,40 @@
+# 车来了广告获取
+||adx.sogaha.cn^$important
+||mobads.baidu.com^$important
+
+# 百度网盘开屏广告
+||*.ubixioe.com^$important
+# 腾讯视频网页广告
+# 头条广告
+||https://gromore.pangolin-sdk-toutiao.com^$important
+||https://toblog.ctobsnssdk.com^$important
+||https://sf6-fe-tos.pglstatp-toutiao.com^$important
+||https://guid.tpns.tencent.com^$important
+||http://sdk.beizi.biz^$important
+||http://sdktmp.hubcloud.com.cn^$important
+||e.qq.com^$important
+||y.qq.com^$important
+||https://resolve.umeng.com^$important
+||https://open.e.kuaishou.com^$important
+||https://tnc3-bjlgy.zijieapi.com^$important
+||https://yumao.puata.info^$important
+||dm-hl.toutiao.com^$important
+||open.e.kuaishou.cn^$important
+||api-access.pangolin-sdk-toutiao1.com^$important
+||sdk.e.qq.com^$important
+||v2.get.sogou.com^$important
+
+# 美团广告
+||meituan.com^$important
+# 开屏广告
+||sdk-monitoring.unityads.unity3d.com^$important
+||ad.xiaomi.com^$important
+||ssp.1rtb.com^$important
+||open.phone.2345.com^$important
+||res-ad.c2c.qq.com^$important
+||mi.gdt.qq.com^$important
+||pgdt.gtimg.cn^$important
+||adsmind.gdtimg.com^$important
+||mi.ads.heytapmobi.com^$important
+||adx.ads.heytapmobi.com^$important
+||appconf-ocs.heytapmobi.com^$important

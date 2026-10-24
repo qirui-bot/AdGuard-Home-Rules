@@ -1,0 +1,47 @@
+! 成人网站过滤白名单
+! 主要用于医疗健康、教育类网站
+! 格式：域名
+! 更新时间：2024-12-20
+
+! ==========政府卫生机构 ==========
+health.gov
+cdc.gov
+who.int
+nhs.uk
+nih.gov
+
+! ========== 医疗健康网站 ==========
+medical-site.com
+healthline.com
+mayoclinic.org
+webmd.com
+medlineplus.gov
+
+! ========== 性教育/生殖健康 ==========
+sex-education.org
+plannedparenthood.org
+scarleteen.com
+
+! ========== 教育机构 ==========
+!中国教育网
+edu.cn
+!国际大学
+harvard.edu
+stanford.edu
+mit.edu
+ox.ac.uk
+
+! ========== 医疗研究机构 ==========
+bmj.com
+nejm.org
+lancet.com
+pubmed.ncbi.nlm.nih.gov
+
+! ========== 公共卫生 ==========
+publichealth.gov
+healthcare.govmentalhealth.gov
+
+! ==========老年用户友好 ==========
+!这些网站可能包含健康内容但被误判
+aarp.org
+webmd.com
